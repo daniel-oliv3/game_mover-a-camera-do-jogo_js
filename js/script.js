@@ -122,6 +122,34 @@
         if(mvDown && !mvUp){
             char.y += 2;
         }
+
+        //Atualizar a posição da câmera em função ao char
+        if(char.x < cam.leftEdge()){
+            cam.x = char.x - (cam.width * 0.25);
+        }
+        if(char.x + char.width > cam.rightEdge()){
+            cam.x = char.x + char.width - (cam.width * 0.75);
+        }
+        if(char.y < cam.topEdge()){
+            cam.y = char.y - (cam.height * 0.25);
+        }
+        if(char.y < cam.bottomEdge()){
+            cam.y = char.y + char.height - (cam.height * 0.75);
+        }
+
+        //Limite da câmera
+        if(cam.x < 0){
+            cam.x = 0;
+        }
+        if(cam.x + cam.width > gameWorld.width){
+            cam.x = gameWorld.width - cam.width;
+        }
+        if(cam.y < 0){
+            cam.y = 0;
+        }
+        if(cam.y + cam.height > gameWorld.height){
+            cam.y = gameWorld.height - cam.height;
+        }
     }
 
     function render(){
