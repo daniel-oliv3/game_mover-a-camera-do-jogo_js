@@ -6,6 +6,19 @@
     var background =  new Image();
     background.src = "img/scene.png";
 
+    //Objetos
+    var sprites = [];
+
+    var gameWorld = {
+        img: background,
+        x: 0,
+        y: 0,
+        width: 800,
+        height: 600
+    };
+
+    sprites.push(gameWorld);
+
     function loop(){
         window.requestAnimationFrame(loop, cnv);
         update();
@@ -17,7 +30,10 @@
     }
 
     function render(){
-        ctx.drawImage(background, 0, 0, 800, 600, 0, 0, 800, 600);
+        for(var i in sprites){
+            var spr = sprites[i];
+            ctx.drawImage(spr.img, 0, 0, spr.width, spr.height, spr.x, spr.y, spr.width, spr.height);
+        }
     }
 
     loop();
