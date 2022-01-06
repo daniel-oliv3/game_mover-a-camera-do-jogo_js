@@ -174,6 +174,8 @@
             ctx.drawImage(spr.img, 0, 0, spr.width, spr.height, spr.x, spr.y, spr.width, spr.height);
         }
         ctx.restore();
+        ctx.font = "bold 25px Arial";
+        ctx.fillText("SCORE: 0", 10, 30);
     }
 
     loop();
