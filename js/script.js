@@ -6,6 +6,9 @@
     var background =  new Image();
     background.src = "img/scene.png";
 
+    var monster =  new Image();
+    monster.src = "img/monster.png";
+
     //Objetos
     var sprites = [];
 
@@ -18,6 +21,21 @@
     };
 
     sprites.push(gameWorld);
+
+    //personagem
+    var char = {
+        img: monster,
+        x: 0,
+        y: 0,
+        width: 64,
+        height: 64
+    }
+
+    sprites.push(char);
+
+    //Centralizar o personagem
+    char.x = (gameWorld.width - char.width)/2;
+    char.y = (gameWorld.height - char.height)/2;
 
     var cam = {
         x: 0,
@@ -42,6 +60,49 @@
     cam.x = (gameWorld.width - cam.width)/2;
     cam.y = (gameWorld.height - cam.height)/2;
 
+
+    //Move o personagem
+    var mvLeft = mvRight = mvUp = mvDown = false;
+
+    //pressionar a tecla
+    window.addEventListener('keydown', function(e){
+        var key = e.keyCode;
+        switch(key){
+            case 37:
+                mvLeft = true;
+                break;
+            case 39:
+                mvRight = true;
+                break;
+            case 38:
+                mvUp = true;
+                break;
+            case 40:
+                mvDown = true;
+                break;
+        }
+    }, false);
+
+    //libera a tecla
+    window.addEventListener('keyup', function(e){
+        var key = e.keyCode;
+        switch(key){
+            case 37:
+                mvLeft = false;
+                break;
+            case 39:
+                mvRight = false;
+                break;
+            case 38:
+                mvUp = false;
+                break;
+            case 40:
+                mvDown = false;
+                break;
+        }
+    }, false);
+
+
     function loop(){
         window.requestAnimationFrame(loop, cnv);
         update();
@@ -49,7 +110,18 @@
     }
 
     function update(){
-
+        if(mvLeft && !mvRight){
+            char.x -= 2;
+        }
+        if(mvRight && !mvLeft){
+            char.x += 2;
+        }
+        if(mvUp && !mvDown){
+            char.y -= 2;
+        }
+        if(mvDown && !mvUp){
+            char.y += 2;
+        }
     }
 
     function render(){
