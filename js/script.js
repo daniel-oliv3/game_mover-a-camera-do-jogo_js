@@ -123,6 +123,20 @@
             char.y += 2;
         }
 
+        //Limite da char/ personagem
+        if(char.x < 0){
+            char.x = 0;
+        }
+        if(char.x + char.width > gameWorld.width){
+            char.x = gameWorld.width - char.width;
+        }
+        if(char.y < 0){
+            char.y = 0;
+        }
+        if(char.y + char.height > gameWorld.height){
+            char.y = gameWorld.height - char.height;
+        }
+
         //Atualizar a posição da câmera em função ao char
         if(char.x < cam.leftEdge()){
             cam.x = char.x - (cam.width * 0.25);
